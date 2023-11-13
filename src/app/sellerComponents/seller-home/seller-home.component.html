@@ -1,0 +1,73 @@
+<section class="bg-gray-50 dark:bg-gray-900 py-3 sm:py-5">
+  <div class="px-4 mx-auto max-w-screen-2xl lg:px-12">
+    <div
+      class="relative overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg"
+    >
+      <div
+        class="flex flex-col px-4 py-3 space-y-3 lg:flex-row lg:items-center lg:justify-between lg:space-y-0 lg:space-x-4"
+      >
+        <div class="flex items-center flex-1 space-x-4">
+          <h3>All Products</h3>
+          <h3 class="text-green-600">{{productMessage}}</h3>
+        </div>
+      </div>
+      <div class="overflow-x-auto">
+        <table
+          class="w-full text-sm text-left text-gray-500 dark:text-gray-400"
+        >
+          <thead
+            class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+          >
+            <tr>
+              <th scope="col" class="px-4 py-3">Product</th>
+              <th scope="col" class="px-4 py-3">Category</th>
+              <th scope="col" class="px-4 py-3">Price</th>
+              <th scope="col" class="px-4 py-3">Color</th>
+              <th scope="col" class="px-4 py-3">Description</th>
+              <th scope="col" class="px-4 py-3">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700" *ngFor= "let item of productList">
+              <th scope="row" class="flex items-center px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                <img
+                  src= "{{item.image}}"
+                  alt="product image"
+                  class="w-auto h-8 mr-3"/>
+                {{item.name | titlecase}}
+              </th>
+              <td class="px-4 py-2">
+                <span
+                  class="bg-primary-100 text-primary-800 text-xs font-medium px-2 py-0.5 rounded dark:bg-primary-900 dark:text-primary-300"
+                  >{{item.category | titlecase}}</span
+                >
+              </td>
+              <td class="px-4 py-2">
+                <span
+                  class="bg-primary-100 text-primary-800 text-xs font-medium px-2 py-0.5 rounded dark:bg-primary-900 dark:text-primary-300"
+                  >{{item.price}}</span
+                >
+              </td>
+              <td class="px-4 py-2">
+                <span
+                  class="bg-primary-100 text-primary-800 text-xs font-medium px-2 py-0.5 rounded dark:bg-primary-900 dark:text-primary-300"
+                  >{{item.color | titlecase}}</span
+                >
+              </td>
+              <td class="px-4 py-2">
+                <span
+                  class="bg-primary-100 text-primary-800 text-xs font-medium px-2 py-0.5 rounded dark:bg-primary-900 dark:text-primary-300"
+                  >{{item.description | titlecase}}</span
+                >
+              </td>
+              <td>
+                <fa-icon type="button"  (click)= "deleteProduct(item.id)" [icon]="iconTrash" ></fa-icon>
+                <fa-icon type="button"  routerLink="/seller-update-product/{{item.id}}" [icon]="iconEdit" class="mx-5" ></fa-icon>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>

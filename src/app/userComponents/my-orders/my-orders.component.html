@@ -1,0 +1,41 @@
+<div class="flex shadow-md">
+    <div class="w-full bg-white px-10 py-10">
+        <div class="flex justify-between border-b pb-8">
+            <h1 class="font-semibold text-2xl">Order Details</h1>
+        </div>
+        <div class="flex mt-10 mb-5">
+            <h3 class="font-semibold text-gray-600 text-xs uppercase w-2/5">
+                Orders
+            </h3>
+            <h3 class="font-semibold text-center text-gray-600 text-xs uppercase w-1/5 text-center">
+                Order Id
+            </h3>
+            <h3 class="font-semibold text-center text-gray-600 text-xs uppercase w-1/5 text-center">
+                Price
+            </h3>
+            <h3 class="font-semibold text-center text-gray-600 text-xs uppercase w-1/5 text-center">
+                Status
+            </h3>
+            <h3 class="font-semibold text-center text-gray-600 text-xs uppercase w-1/5 text-center">
+                Cancel
+            </h3>
+        </div>
+        <div class="flex items-center hover:bg-gray-100 -mx-8 px-6" *ngFor="let item of orderData">
+            <div class="flex w-2/5">
+                <div class="w-20">
+                    <a href="">
+                        <img class="h-12"
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSngD44sx_YGxg7oyAR5ymylqi7xj02aTJCZAyNV7wk&s"
+                            alt="" />
+                    </a>
+                </div>
+            </div>
+            <span class="text-center w-1/5 font-semibold text-sm">{{item.id}}</span>
+            <span class="text-center w-1/5 font-semibold text-sm">₹{{ item.totalPrice }}</span>
+            <span class="text-center w-1/5 font-semibold text-sm">In Progress</span>
+
+            <span class="text-center w-1/5 font-semibold text-sm"><button (click)="cancelOrder(item.id)">Cancel</button></span>
+        </div>
+
+    </div>
+</div>

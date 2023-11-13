@@ -1,0 +1,75 @@
+<nav
+  class="navbar relative z-40 bg-gradient-to-r from-blue-500 to-purple-500 py-3 px-4 flex justify-between items-center"
+>
+  <div class="text-white">
+    <h1 id="heading" class="text-3xl font-bold">
+      <a routerLink="" class="text-white">ShopEasy</a>
+    </h1>
+  </div>
+  <div
+    *ngIf="menuType !== 'seller'"
+    class="nav-searchs ml-4 flex items-center rounded-lg bg-white px-4 py-2"
+  >
+    <input
+      type="text"
+      placeholder="Search for Products, Brands, and More"
+      class="w-96 h-10 px-2 rounded-lg border-none focus:ring-2 focus:ring-blue-500 focus:outline-none"
+      (keyup)="searchProduct($event)"
+      (blur)="hideSearch()"
+      #inputSearch
+    />
+    <button
+      id="nav-btns"
+      class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+      (click)="submitSearch(inputSearch.value)"
+    >
+      Search
+    </button>
+    <ul
+      class="list-item z-10 absolute top-16 px-2 bg-white rounded-lg"
+      *ngIf="searchResult"
+    >
+      <li *ngFor="let item of searchResult">
+        <a href="" (mousedown)="redirectToDetails(item.id)">
+          {{ item.name }}
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div [ngSwitch]="menuType">
+    <ul class="flex space-x-4" *ngSwitchCase="'default'">
+      <li>
+        <a routerLink="seller-auth" class="text-white">Become a Seller</a>
+      </li>
+      <li><a routerLink="user-auth" class="text-white">Sign in</a></li>
+      <li><a href="#" class="text-white">Cart ({{cartItems}})</a></li>
+    </ul>
+
+    <ul class="flex space-x-4" *ngSwitchCase="'user'">
+      <li>
+        <a routerLink="seller-auth" class="text-white">Become a Seller</a>
+      </li>
+      <li>
+        <a routerLink="my-orders" class="text-white">{{userName | titlecase}}</a>
+      </li>
+      <li>
+        <a (click)="userLogout()" class="text-white cursor-pointer">Logout</a>
+      </li>
+      <li><a [routerLink]= "cartItems>0?'cart-summary': null" class="text-white">Cart ({{cartItems}})</a></li>
+    </ul>
+
+    <ul class="flex space-x-4" *ngSwitchCase="'seller'">
+      <li>
+        <a routerLink="seller-add-product" class="text-white">Add Product</a>
+      </li>
+      <li><a routerLink="seller-home" class="text-white">Product List</a></li>
+      <li>
+        <a class="text-white">{{ sellerName | titlecase }}</a>
+      </li>
+      <li>
+        <a (click)="logout()" class="text-white cursor-pointer">Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>
